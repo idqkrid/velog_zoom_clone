@@ -4,4 +4,7 @@ const createRedisClient = () => {
   return redis.createClient()
 }
 
-const coreRedisClient = createRedisClient()
+export const coreRedisClient = createRedisClient()
+
+// this subscriber is used for sessions
+export const globalSubscriber = createRedisClient()

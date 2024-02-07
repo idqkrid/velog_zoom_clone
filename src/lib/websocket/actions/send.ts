@@ -19,13 +19,20 @@ type ReuseIdSuccessAction = {
 
 type SubscriptionMessageAction = {
   type: 'subscriptionMessage'
+  key: string
   message: any
+}
+
+type SubscriptionSuccess = {
+  type: 'subscriptionSuccess'
+  key: string
 }
 
 export type SendAction =
   | ConnectedAction
   | ReuseIdSuccessAction
   | SubscriptionMessageAction
+  | SubscriptionSuccess
 
 const actionCreators = {
   connected: (id: string, token: string): ConnectedAction => ({
@@ -38,9 +45,17 @@ const actionCreators = {
     id: id,
   }),
   reuseIdSuccess: (): ReuseIdSuccessAction => ({ type: 'reuseIdSuccess' }),
-  subscriptionMessage: (message: any): SubscriptionMessageAction => ({
+  subscriptionMessage: (
+    key: string,
+    message: any
+  ): SubscriptionMessageAction => ({
     type: 'subscriptionMessage',
+    key,
     message,
+  }),
+  SubscriptionSuccess: (key: string): SubscriptionSuccess => ({
+    type: 'subscriptionSuccess',
+    key,
   }),
 }
 
